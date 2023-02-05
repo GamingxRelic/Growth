@@ -1,0 +1,172 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://assets/scenes/scene_two/scene2Midground.png" type="Texture" id=1]
+[ext_resource path="res://assets/scenes/scene_two/scene2Frontground.png" type="Texture" id=2]
+[ext_resource path="res://assets/scenes/scene_two/scene2Background.png" type="Texture" id=3]
+[ext_resource path="res://scenes/player/Player.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/environment/Grapple_Bulb.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scripts/scenes/Scene_Two.gd" type="Script" id=6]
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "fade_in"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "fade_out"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ) ]
+}
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 11.1875, 30.1563 )
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 10, 14.5625 )
+
+[node name="Scene_Two" type="Node2D"]
+script = ExtResource( 6 )
+
+[node name="YSort" type="YSort" parent="."]
+position = Vector2( 0, 3 )
+
+[node name="Background2" type="Sprite" parent="YSort"]
+position = Vector2( 248, 234 )
+z_index = -1
+texture = ExtResource( 3 )
+centered = false
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="YSort"]
+
+[node name="BackgroundParallaxLayer" type="ParallaxLayer" parent="YSort/ParallaxBackground"]
+motion_scale = Vector2( 0.8, 0.8 )
+
+[node name="Background" type="Sprite" parent="YSort/ParallaxBackground/BackgroundParallaxLayer"]
+position = Vector2( 107, 8 )
+z_index = -1
+texture = ExtResource( 3 )
+centered = false
+
+[node name="Midground" type="Sprite" parent="YSort"]
+position = Vector2( -156, -257 )
+texture = ExtResource( 1 )
+centered = false
+
+[node name="Player" parent="YSort" instance=ExtResource( 4 )]
+position = Vector2( 616, 338 )
+
+[node name="Frontground" type="Sprite" parent="YSort"]
+position = Vector2( -156, -257 )
+z_index = 5
+texture = ExtResource( 2 )
+centered = false
+
+[node name="Grapple_Bulb" parent="YSort" instance=ExtResource( 5 )]
+position = Vector2( 678, 81 )
+
+[node name="Grapple_Bulb2" parent="YSort" instance=ExtResource( 5 )]
+position = Vector2( 877, 97 )
+
+[node name="CollisionPolygons" type="StaticBody2D" parent="YSort" groups=["ground"]]
+position = Vector2( 0, -3 )
+z_index = 8
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="YSort/CollisionPolygons"]
+position = Vector2( 744, 286 )
+polygon = PoolVector2Array( -73, -204, -153, -204, -153, -65, -569, -65, -569, -92, -185, -92, -185, -540, -73, -540 )
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="YSort/CollisionPolygons"]
+position = Vector2( 744, 286 )
+polygon = PoolVector2Array( 114, -128, 115, -128, 115, -127, 116, -127, 116, -126, 117, -126, 117, -125, 118, -125, 118, -124, 119, -124, 119, -123, 119, -123, 120, -123, 122, -123, 122, -122, 123, -122, 123, -120, 123, -110, 123, -19, 182, -19, 182, -17, 184, -17, 184, -8, 59, -8, 59, -15, 63, -19, 63, -93, 57, -99, 56, -118, 49, -123, 47, -129, 114, -129 )
+
+[node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="YSort/CollisionPolygons"]
+position = Vector2( 744, 286 )
+polygon = PoolVector2Array( -93, -27, -149, -24, -149, 23, -184, 23, -184, -24, -184, -37, -92, -36 )
+
+[node name="CollisionPolygon2D4" type="CollisionPolygon2D" parent="YSort/CollisionPolygons"]
+position = Vector2( 744, 286 )
+polygon = PoolVector2Array( 243, 31, 200, 31, 200, 18, 243, 18 )
+
+[node name="CollisionPolygon2D5" type="CollisionPolygon2D" parent="YSort/CollisionPolygons"]
+position = Vector2( 744, 286 )
+polygon = PoolVector2Array( 178, 58, 135, 58, 135, 45, 178, 45 )
+
+[node name="CollisionPolygon2D6" type="CollisionPolygon2D" parent="YSort/CollisionPolygons"]
+position = Vector2( 744, 286 )
+polygon = PoolVector2Array( -44, 83, -59, 83, -59, 93, -68, 93, -68, 100, -92, 100, -92, 540, -188, 540, -188, 172, -332, 172, -332, 108, -900, 108, -900, 76, -44, 76 )
+
+[node name="CollisionPolygon2D7" type="CollisionPolygon2D" parent="YSort/CollisionPolygons"]
+position = Vector2( 744, 286 )
+polygon = PoolVector2Array( 202, 113, 245, 113, 245, 114, 411, 114, 411, 113, 900, 113, 900, 144, 409, 144, 409, 208, 170, 208, 170, 540, 78, 540, 78, 137, 58, 137, 58, 128, 42, 128, 42, 112, 202, 112 )
+
+[node name="SceneChange" type="Node2D" parent="."]
+position = Vector2( 122, 351 )
+z_index = 5
+
+[node name="ColorRect" type="ColorRect" parent="SceneChange"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -1654.0
+margin_top = -1237.0
+margin_right = 2346.0
+margin_bottom = 2763.0
+mouse_filter = 2
+color = Color( 0, 0, 0, 0 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SceneChange"]
+root_node = NodePath("../ColorRect")
+anims/RESET = SubResource( 2 )
+anims/fade_in = SubResource( 3 )
+anims/fade_out = SubResource( 4 )
+
+[node name="Back_Scene" type="Area2D" parent="SceneChange"]
+position = Vector2( -83, 0 )
+
+[node name="Back_Scene_Collider" type="CollisionShape2D" parent="SceneChange/Back_Scene"]
+position = Vector2( 540, -16.8438 )
+shape = SubResource( 5 )
+
+[node name="Next_Scene" type="Area2D" parent="SceneChange"]
+
+[node name="Next_Scene_Collider" type="CollisionShape2D" parent="SceneChange/Next_Scene"]
+position = Vector2( 453, -115.438 )
+shape = SubResource( 6 )
+
+[connection signal="animation_finished" from="SceneChange/AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[connection signal="body_entered" from="SceneChange/Back_Scene" to="." method="_on_Back_Scene_body_entered"]
+[connection signal="body_entered" from="SceneChange/Next_Scene" to="." method="_on_Next_Scene_body_entered"]

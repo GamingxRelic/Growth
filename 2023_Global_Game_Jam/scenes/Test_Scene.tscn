@@ -1,0 +1,55 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://assets/shaders/materials/whiten.tres" type="Material" id=1]
+[ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://assets/tiles/grass/Tile_1.png" type="Texture" id=3]
+[ext_resource path="res://scenes/player/Player.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/environment/Grapple_Bulb.tscn" type="PackedScene" id=5]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 8, 8 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 215.5, 10 )
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Hookable_Object" type="StaticBody2D" parent="." groups=["can_hook"]]
+position = Vector2( 63, -56 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hookable_Object"]
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="Hookable_Object"]
+texture = ExtResource( 3 )
+
+[node name="Hookable_Object2" type="StaticBody2D" parent="." groups=["can_hook"]]
+position = Vector2( -280, -64 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hookable_Object2"]
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="Hookable_Object2"]
+texture = ExtResource( 3 )
+
+[node name="Ground" type="StaticBody2D" parent="." groups=["can_hook"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
+position = Vector2( 64, 53 )
+shape = SubResource( 2 )
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Ground"]
+position = Vector2( 57, -63 )
+polygon = PoolVector2Array( 47, 109, 168, 58, 455, 110, 161, 140 )
+
+[node name="Sprite" type="Sprite" parent="."]
+material = ExtResource( 1 )
+position = Vector2( 64, 53 )
+scale = Vector2( 6.71875, 0.3125 )
+texture = ExtResource( 2 )
+
+[node name="Player" parent="." instance=ExtResource( 4 )]
+position = Vector2( -136, -4 )
+
+[node name="Grapple_Bulb" parent="." instance=ExtResource( 5 )]
+position = Vector2( -15, -43 )

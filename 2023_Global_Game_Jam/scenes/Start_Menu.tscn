@@ -1,0 +1,47 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scripts/scenes/Start_Menu.gd" type="Script" id=1]
+[ext_resource path="res://assets/scenes/menuBackground.png" type="Texture" id=2]
+
+[node name="Menu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -768.0
+margin_bottom = -450.0
+script = ExtResource( 1 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -576.0
+margin_top = -315.0
+margin_right = -476.0
+margin_bottom = -215.0
+alignment = 1
+
+[node name="Start_Button" type="Button" parent="VBoxContainer"]
+margin_top = 28.0
+margin_right = 100.0
+margin_bottom = 48.0
+text = "Start"
+
+[node name="Exit_Button" type="Button" parent="VBoxContainer"]
+margin_top = 52.0
+margin_right = 100.0
+margin_bottom = 72.0
+text = "Exit"
+
+[node name="Camera2D" type="Camera2D" parent="VBoxContainer"]
+position = Vector2( 50, 25 )
+current = true
+zoom = Vector2( 0.325, 0.325 )
+
+[node name="Sprite" type="Sprite" parent="VBoxContainer"]
+position = Vector2( 50, 52 )
+z_index = -1
+texture = ExtResource( 2 )
+
+[connection signal="pressed" from="VBoxContainer/Start_Button" to="." method="_on_Start_Button_pressed"]
+[connection signal="pressed" from="VBoxContainer/Exit_Button" to="." method="_on_Exit_Button_pressed"]
